@@ -1,0 +1,568 @@
+<div class="cg-app" id="cg-app">
+  <div class="cg-card">
+    <header class="cg-head">
+      <div class="cg-brand">CRESHY <span>CHAT-GEN</span></div>
+      <p>Chat mockup studio for stories, memes, tutorials and design previews</p>
+    </header>
+
+    <!-- Usage counter + soft upgrade nudge -->
+    <div class="cg-usage" id="cg-usage">
+      <div class="cg-usage-top">
+        <span id="cg-usage-text" class="cg-usage-text">5 of 5 uses remaining</span>
+        <span id="cg-dots" class="cg-dots" aria-hidden="true"></span>
+      </div>
+      <div id="cg-nudge" class="cg-nudge" hidden>
+        <span>⚡ Only 1 use left! Go unlimited with the Premium Plan. Get 14 days free!</span>
+        <a class="cg-upgrade cg-upgrade-sm" href="https://premium.creshy.com/membership-levels/" target="_blank" rel="noopener noreferrer">Upgrade</a>
+      </div>
+    </div>
+
+    <!-- Limit reached box -->
+    <div id="cg-limit" class="cg-limit" role="status" hidden>
+      <div class="cg-limit-icon" aria-hidden="true">🔒</div>
+      <h4 class="cg-limit-title">You've reached your usage limit</h4>
+      <div class="cg-countdown">Ready again in <span id="cg-timer" class="cg-timer">0h 00m 00s</span></div>
+      <p class="cg-limit-msg">Upgrade to the Premium Plan and enjoy unlimited access with no waiting. Use it as much as you want, anytime. Get 14 days free!</p>
+      <a class="cg-upgrade" href="https://premium.creshy.com/membership-levels/" target="_blank" rel="noopener noreferrer">Upgrade to Premium Plan · 14 days free</a>
+    </div>
+
+    <div class="cg-tabs" role="tablist" aria-label="Chat style">
+      <button type="button" class="cg-tab" id="cg-t-wa" role="tab" data-eng="wa">WhatsApp style</button>
+      <button type="button" class="cg-tab" id="cg-t-msn" role="tab" data-eng="msn">Messenger style</button>
+    </div>
+
+    <div class="cg-split">
+      <!-- PREVIEW -->
+      <div class="cg-stage">
+        <div class="cg-phone" id="cg-phone" data-eng="wa" data-theme="dark">
+          <div class="cg-sb"><span id="cg-sbtime">09:41</span><span id="cg-batt">🔋 90%</span></div>
+          <div class="cg-hd">
+            <span class="cg-back" id="cg-back">←</span>
+            <img id="cg-dp" class="cg-dp" alt="Contact photo" src="">
+            <div class="cg-info"><b id="cg-name"></b><small id="cg-stat"></small></div>
+            <div class="cg-hicons" id="cg-icons"></div>
+          </div>
+          <div class="cg-body" id="cg-body"></div>
+          <div class="cg-ft" id="cg-ft"></div>
+          <div class="cg-wm" id="cg-wm">Fictional chat · made with Creshy Chat-Gen</div>
+        </div>
+      </div>
+
+      <!-- CONTROLS -->
+      <div class="cg-ctl" id="cg-ctl">
+        <section class="cg-box">
+          <h3>Phone and style</h3>
+          <div class="cg-g2">
+            <div class="cg-f"><label for="cg-theme">Theme</label><select id="cg-theme"><option value="dark">Dark</option><option value="light">Light</option></select></div>
+            <div class="cg-f"><label for="cg-fmt">Time format</label><select id="cg-fmt"><option value="12">12-hour</option><option value="24">24-hour</option></select></div>
+            <div class="cg-f"><label for="cg-sbt">Phone clock</label><input type="time" id="cg-sbt"></div>
+            <div class="cg-f"><label for="cg-bat">Battery (%)</label><input type="number" id="cg-bat" min="1" max="100" inputmode="numeric"></div>
+          </div>
+          <div class="cg-checks">
+            <label><input type="checkbox" id="cg-bezel"> Show phone frame</label>
+            <label><input type="checkbox" id="cg-wmc"> Show “fictional chat” label</label>
+            <label><input type="checkbox" id="cg-seen"> Show “seen” photo on last sent message (Messenger)</label>
+          </div>
+        </section>
+
+        <section class="cg-box">
+          <h3>Contact</h3>
+          <div class="cg-f"><label for="cg-nm">Name</label><input type="text" id="cg-nm" maxlength="40" placeholder="Contact name"></div>
+          <div class="cg-f"><label for="cg-st">Status line</label><input type="text" id="cg-st" maxlength="40" list="cg-stl" placeholder="online"><datalist id="cg-stl"><option value="online"><option value="typing…"><option value="Active now"><option value="last seen today at 9:41 AM"></datalist></div>
+          <div class="cg-f"><label for="cg-dpf">Profile photo</label><input type="file" id="cg-dpf" accept="image/*"></div>
+          <button type="button" class="cg-btn cg-line" id="cg-dpr">Use default photo</button>
+        </section>
+
+        <section class="cg-box">
+          <h3 id="cg-bh">Message builder</h3>
+          <div class="cg-g2">
+            <div class="cg-f"><label for="cg-type">Type</label>
+              <select id="cg-type"><option value="text">Text</option><option value="image">Photo</option><option value="voice">Voice message</option><option value="deleted">Deleted message</option><option value="divider">Date or notice</option></select></div>
+            <div class="cg-f"><label for="cg-mt">Message time</label><input type="time" id="cg-mt"></div>
+          </div>
+          <div class="cg-f" id="cg-fi" hidden><label for="cg-img">Photo</label><input type="file" id="cg-img" accept="image/*"><small id="cg-imgn"></small></div>
+          <div class="cg-f" id="cg-ftxt"><label for="cg-text" id="cg-textl">Message</label><textarea id="cg-text" rows="3" maxlength="600" placeholder="Write a message…"></textarea></div>
+          <div class="cg-f" id="cg-fd" hidden><label for="cg-dur">Voice length (m:ss)</label><input type="text" id="cg-dur" value="0:12" inputmode="numeric" maxlength="5"></div>
+          <div class="cg-g2" id="cg-opt">
+            <div class="cg-f" id="cg-fr"><label for="cg-rep">Reply to (optional, WhatsApp)</label><input type="text" id="cg-rep" maxlength="80" placeholder="Quoted text"></div>
+            <div class="cg-f"><label for="cg-rx">Reaction</label><select id="cg-rx"><option value="">None</option><option>👍</option><option>❤️</option><option>😂</option><option>😮</option><option>😢</option><option>🙏</option></select></div>
+            <div class="cg-f" id="cg-fs"><label for="cg-ticks">Status of sent messages (WhatsApp)</label><select id="cg-ticks"><option value="sent">Sent (one tick)</option><option value="delivered">Delivered (two ticks)</option><option value="read" selected>Read (blue ticks)</option></select></div>
+          </div>
+          <div class="cg-checks"><label><input type="checkbox" id="cg-adv" checked> Add 1 minute to the time after each message</label></div>
+          <div id="cg-err" class="cg-err" role="alert" hidden></div>
+          <div class="cg-g2" id="cg-addrow">
+            <button type="button" class="cg-btn cg-grey" id="cg-addl">Add received</button>
+            <button type="button" class="cg-btn cg-blue" id="cg-addr">Add sent</button>
+          </div>
+          <div class="cg-g2" id="cg-editrow" hidden>
+            <button type="button" class="cg-btn cg-blue" id="cg-save">Save changes</button>
+            <button type="button" class="cg-btn cg-grey" id="cg-cancel">Cancel</button>
+          </div>
+          <p class="cg-hint">Tip: press Ctrl + Enter to add a sent message.</p>
+        </section>
+
+        <section class="cg-box">
+          <h3>Messages <span id="cg-count" class="cg-badge">0</span></h3>
+          <ul id="cg-list" class="cg-list"></ul>
+          <div class="cg-g2">
+            <button type="button" class="cg-btn cg-line" id="cg-sample">Load sample chat</button>
+            <button type="button" class="cg-btn cg-danger" id="cg-clear">Clear chat</button>
+          </div>
+        </section>
+
+        <section class="cg-box">
+          <h3>Export</h3>
+          <div class="cg-g2">
+            <div class="cg-f"><label for="cg-scale">Image quality</label><select id="cg-scale"><option value="1">Standard (1x)</option><option value="2" selected>High (2x)</option><option value="3">Ultra (3x)</option></select></div>
+            <div class="cg-f cg-chk"><label><input type="checkbox" id="cg-fit" checked> Fit the whole chat in the image</label></div>
+          </div>
+          <button type="button" class="cg-btn cg-green" id="cg-dl">📸 Save screenshot</button>
+          <div class="cg-g2">
+            <button type="button" class="cg-btn cg-line" id="cg-cp">Copy image</button>
+            <button type="button" class="cg-btn cg-line" id="cg-json">Save chat file</button>
+          </div>
+          <button type="button" class="cg-btn cg-line" id="cg-load">Open a saved chat file</button>
+          <input type="file" id="cg-loadf" accept="application/json,.json" hidden>
+          <div id="cg-xmsg" class="cg-xmsg" role="status" hidden></div>
+          <p class="cg-hint">For entertainment, mockups, teaching and storytelling. Please don’t use it to impersonate real people or mislead others.</p>
+        </section>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+.cg-app{--pn:#1e293b;--bx:#0f172a;--ln:#334155;--mu:#94a3b8;--bl:#0084ff;--gr:#22c55e;--rd:#ef4444;--prem1:#7c3aed;--prem2:#ec4899;font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;max-width:940px;margin:0 auto;color:#fff;box-sizing:border-box}
+.cg-app *,.cg-app *::before,.cg-app *::after{box-sizing:border-box}
+.cg-card{background:var(--pn);border:1px solid rgba(255,255,255,.1);border-radius:28px;padding:24px}
+.cg-head{text-align:center;margin-bottom:16px}.cg-brand{font-weight:900;color:var(--bl);font-size:18px}.cg-brand span{font-weight:300;color:#fff}.cg-head p{font-size:12px;color:var(--mu);margin:5px 0 0}
+.cg-tabs{display:flex;gap:10px;margin-bottom:18px}
+.cg-tab{flex:1;padding:12px;border:0;border-radius:12px;cursor:pointer;font-weight:800;background:var(--bx);color:#64748b;font-family:inherit;min-height:46px;font-size:14px}
+.cg-tab[aria-selected=true]{background:var(--bl);color:#fff}
+.cg-split{display:flex;gap:22px;align-items:flex-start}
+.cg-stage{flex:0 0 360px;position:sticky;top:12px}
+.cg-ctl{flex:1;min-width:0;display:grid;gap:14px;transition:opacity .2s}
+.cg-box{background:var(--bx);padding:16px;border-radius:16px}
+.cg-box h3{margin:0 0 12px;font-size:12px;font-weight:900;color:var(--bl);letter-spacing:.5px;text-transform:uppercase}
+.cg-badge{background:var(--bl);color:#fff;border-radius:99px;padding:1px 8px;font-size:11px;margin-left:6px}
+.cg-g2{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.cg-f{margin-bottom:12px;min-width:0}.cg-f[hidden]{display:none}
+.cg-f label{display:block;font-size:11px;font-weight:700;color:var(--mu);margin-bottom:6px}
+.cg-f small{display:block;margin-top:4px;font-size:11px;color:var(--mu)}
+.cg-app select,.cg-app input[type=text],.cg-app input[type=time],.cg-app input[type=number],.cg-app textarea{width:100%;background:var(--pn);border:1px solid var(--ln);padding:11px;border-radius:9px;color:#fff;font-size:15px;font-family:inherit;min-height:44px;outline:none}
+.cg-app textarea{resize:vertical}
+.cg-app input[type=file]{width:100%;font-size:12px;color:var(--mu)}
+.cg-app select:focus,.cg-app input:focus,.cg-app textarea:focus,.cg-btn:focus-visible,.cg-tab:focus-visible{outline:3px solid rgba(0,132,255,.45);outline-offset:1px}
+.cg-app input[type=time]::-webkit-calendar-picker-indicator{filter:invert(1)}
+.cg-checks{display:grid;gap:2px;margin-bottom:10px}.cg-checks label,.cg-chk label{display:flex;gap:10px;align-items:center;font-size:13px;color:#e2e8f0;min-height:36px;cursor:pointer;margin:0}
+.cg-checks input,.cg-chk input{width:18px;height:18px;flex:none}
+.cg-chk{display:flex;align-items:flex-end}
+.cg-btn{border:0;border-radius:11px;padding:12px;font-weight:800;font-size:14px;cursor:pointer;font-family:inherit;min-height:46px;color:#fff;width:100%;margin-bottom:10px;transition:filter .2s}
+.cg-btn:hover{filter:brightness(1.1)}
+.cg-g2 .cg-btn{margin-bottom:10px}
+.cg-blue{background:var(--bl)}.cg-grey{background:#334155}.cg-green{background:var(--gr);font-size:15px}.cg-line{background:transparent;border:1.5px solid var(--ln)}.cg-danger{background:transparent;border:1.5px solid var(--rd);color:var(--rd)}
+.cg-hint{font-size:11px;color:var(--mu);margin:4px 0 0;line-height:1.5}
+.cg-err{background:rgba(239,68,68,.15);color:#fca5a5;padding:10px 12px;border-radius:10px;font-size:13px;font-weight:600;margin-bottom:10px}
+.cg-xmsg{padding:10px 12px;border-radius:10px;font-size:13px;font-weight:600;background:rgba(34,197,94,.15);color:#86efac;margin:2px 0 8px}.cg-xmsg.bad{background:rgba(239,68,68,.15);color:#fca5a5}
+.cg-list{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:6px;max-height:300px;overflow-y:auto}
+.cg-li{display:flex;align-items:center;gap:8px;background:var(--pn);border-radius:10px;padding:8px 10px;font-size:13px}
+.cg-li .cg-side{flex:none;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;font-weight:800;background:#334155}.cg-li .cg-side.r{background:var(--bl)}
+.cg-li .cg-lt{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cg-li .cg-lm{flex:none;color:var(--mu);font-size:11px}
+.cg-li button{flex:none;border:0;background:transparent;color:#cbd5e1;font-size:15px;cursor:pointer;width:32px;height:32px;border-radius:8px}.cg-li button:hover{background:#334155}
+.cg-empty{color:var(--mu);font-size:13px;text-align:center;padding:14px}
+
+/* ---------- locked state, usage counter, nudge and limit box ---------- */
+.cg-ctl.cg-locked,.cg-tabs.cg-locked{opacity:.5}
+.cg-ctl button:disabled,.cg-ctl input:disabled,.cg-ctl select:disabled,.cg-ctl textarea:disabled,.cg-tabs button:disabled{cursor:not-allowed}
+.cg-btn:disabled:hover{filter:none}
+.cg-usage{background:var(--bx);border:1px solid var(--ln);border-radius:14px;padding:12px 14px;margin:0 0 16px}
+.cg-usage-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.cg-usage-text{font-size:14px;font-weight:700;color:#fff}
+.cg-dots{display:flex;gap:6px}
+.cg-dot{width:22px;height:8px;border-radius:6px;background:var(--bl);transition:background .3s}
+.cg-dot.off{background:var(--ln)}
+.cg-nudge[hidden],.cg-limit[hidden]{display:none}
+.cg-nudge{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:10px;padding:10px 12px;border-radius:10px;background:linear-gradient(135deg,rgba(124,58,237,.25),rgba(236,72,153,.22));font-size:14px;font-weight:600;line-height:1.4;color:#fff}
+.cg-nudge span{flex:1 1 220px}
+.cg-upgrade{display:inline-block;text-align:center;text-decoration:none;color:#fff!important;font-weight:700;font-size:15px;padding:13px 24px;border-radius:12px;background:linear-gradient(135deg,var(--prem1),var(--prem2));box-shadow:0 6px 18px rgba(124,58,237,.4);transition:transform .15s,box-shadow .15s,filter .15s;min-height:44px}
+.cg-upgrade:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(124,58,237,.55);filter:brightness(1.07)}
+.cg-upgrade:focus-visible{outline:3px solid rgba(236,72,153,.55);outline-offset:2px}
+.cg-upgrade-sm{padding:8px 16px;font-size:14px;min-height:38px;border-radius:10px;box-shadow:0 3px 10px rgba(124,58,237,.35)}
+.cg-limit{text-align:center;padding:22px 18px;margin:0 0 18px;border-radius:18px;border:2px solid transparent;background:linear-gradient(var(--bx),var(--bx)) padding-box,linear-gradient(135deg,var(--prem1),var(--prem2)) border-box;box-shadow:0 8px 24px rgba(124,58,237,.25)}
+.cg-limit-icon{font-size:30px;line-height:1;margin-bottom:6px}
+.cg-limit-title{margin:0 0 10px;font-size:clamp(18px,4.5vw,22px);color:#fff}
+.cg-countdown{display:inline-block;background:var(--pn);border-radius:12px;padding:10px 18px;font-size:15px;font-weight:600;color:var(--mu);margin-bottom:12px}
+.cg-timer{display:inline-block;margin-left:6px;font-size:clamp(20px,6vw,26px);font-weight:800;color:#fff;font-variant-numeric:tabular-nums}
+.cg-limit-msg{margin:0 auto 16px;max-width:460px;font-size:15px;line-height:1.55;color:#e2e8f0}
+
+/* PHONE */
+.cg-phone{--bg:#0b141a;--hd:#202c33;--inp:#2a3942;--bl:#202c33;--br:#005c4b;--tx:#e9edef;--mu:#8696a0;--ac:#00a884;--brt:#e9edef;--dots:rgba(255,255,255,.04);--tk:#53bdeb;
+  width:360px;height:640px;border:8px solid #334155;border-radius:36px;overflow:hidden;display:flex;flex-direction:column;background:var(--bg);color:var(--tx);box-shadow:0 20px 40px rgba(0,0,0,.5);position:relative}
+.cg-phone.nobezel{border:0;border-radius:0;width:344px;height:624px;box-shadow:none}
+.cg-phone[data-eng=wa][data-theme=light]{--bg:#efeae2;--hd:#f0f2f5;--inp:#fff;--bl:#fff;--br:#d9fdd3;--tx:#111b21;--mu:#667781;--brt:#111b21;--dots:rgba(0,0,0,.05)}
+.cg-phone[data-eng=msn]{--bg:#000;--hd:#000;--inp:#303030;--bl:#303030;--br:#0084ff;--tx:#fff;--mu:#b0b3b8;--ac:#0084ff;--brt:#fff}
+.cg-phone[data-eng=msn][data-theme=light]{--bg:#fff;--hd:#fff;--inp:#f0f2f5;--bl:#e4e6eb;--tx:#050505;--mu:#65676b}
+.cg-sb{display:flex;justify-content:space-between;padding:8px 22px;font-size:12px;font-weight:600;background:rgba(127,127,127,.12);flex:none}
+.cg-hd{display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--hd);flex:none}
+.cg-phone[data-eng=msn] .cg-hd{border-bottom:1px solid rgba(127,127,127,.2)}
+.cg-back{color:var(--mu);font-size:20px}.cg-phone[data-eng=msn] .cg-back{color:var(--ac);font-size:26px;line-height:1}
+.cg-dp{width:38px;height:38px;border-radius:50%;object-fit:cover;background:#8a97a0;flex:none}
+.cg-info{flex:1;min-width:0}.cg-info b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.cg-info small{font-size:11px;color:var(--mu)}
+.cg-phone[data-eng=wa] .cg-info small{color:var(--ac)}
+.cg-hicons{font-size:15px;white-space:pre;color:var(--mu)}.cg-phone[data-eng=msn] .cg-hicons{color:var(--ac)}
+.cg-body{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:3px;background-color:var(--bg)}
+.cg-phone[data-eng=wa] .cg-body{background-image:radial-gradient(var(--dots) 1.5px,transparent 1.5px);background-size:20px 20px}
+.cg-pill{align-self:center;background:rgba(127,127,127,.25);color:var(--mu);font-size:11px;padding:5px 12px;border-radius:8px;margin:8px 0;font-weight:600;text-transform:uppercase;text-align:center;max-width:90%}
+.cg-phone[data-eng=msn] .cg-pill{background:none;text-transform:none;font-weight:500;margin:10px 0 4px}
+.cg-m{position:relative;max-width:82%;padding:6px 9px 6px 10px;font-size:13.5px;line-height:1.4;box-shadow:0 1px 1px rgba(0,0,0,.15);word-wrap:break-word;overflow-wrap:anywhere}
+.cg-m.l{align-self:flex-start;background:var(--bl);border-radius:0 8px 8px 8px}.cg-m.r{align-self:flex-end;background:var(--br);color:var(--brt);border-radius:8px 0 8px 8px}
+.cg-m.rx{margin-bottom:12px}
+.cg-t{white-space:pre-wrap}.cg-m::after{content:'';display:block;clear:both}
+.cg-meta{float:right;font-size:10px;color:var(--mu);margin:6px 0 -2px 8px;white-space:nowrap}
+.cg-tick{margin-left:3px;font-size:12px;font-weight:700;letter-spacing:-1px}
+.cg-q{background:rgba(127,127,127,.2);border-left:4px solid var(--ac);border-radius:6px;padding:5px 8px;margin-bottom:5px;font-size:12px}.cg-q b{display:block;color:var(--ac);font-size:11.5px}.cg-q span{display:block;opacity:.85;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.cg-pic{display:block;width:100%;max-width:230px;border-radius:6px;margin:-2px 0 2px}
+.cg-del{font-style:italic;color:var(--mu)}
+.cg-v{display:flex;align-items:center;gap:8px;min-width:190px}.cg-play{flex:none;width:28px;text-align:center;font-size:16px}
+.cg-wave{display:flex;align-items:center;gap:2px;flex:1;height:26px}.cg-wave i{display:block;width:2.5px;border-radius:2px;background:var(--mu)}
+.cg-vd{font-size:10px;color:var(--mu)}
+.cg-rxn{position:absolute;bottom:-12px;font-size:12px;background:var(--bl);border:1.5px solid var(--bg);border-radius:99px;padding:1px 5px;line-height:1.3}.cg-m.l .cg-rxn{left:8px}.cg-m.r .cg-rxn{right:8px;background:var(--br)}
+/* messenger */
+.cg-row{display:flex;align-items:flex-end;gap:8px;max-width:80%}.cg-row.l{align-self:flex-start}.cg-row.r{align-self:flex-end;flex-direction:column;align-items:flex-end}
+.cg-av{width:28px;height:28px;border-radius:50%;object-fit:cover;flex:none;background:#8a97a0}.cg-av.ph{visibility:hidden}
+.cg-bub{position:relative;border-radius:18px;padding:8px 13px;font-size:14px;line-height:1.4;word-wrap:break-word;overflow-wrap:anywhere}
+.cg-row.l .cg-bub{background:var(--bl);color:var(--tx)}.cg-row.r .cg-bub{background:var(--br);color:#fff}
+.cg-bub.rx{margin-bottom:10px}.cg-bub.pic{padding:0;background:none!important}.cg-bub.pic img{display:block;max-width:220px;width:100%;border-radius:18px}
+.cg-bub .cg-rxn{bottom:-11px}.cg-row.l .cg-bub .cg-rxn{left:10px}.cg-row.r .cg-bub .cg-rxn{right:10px}
+.cg-bub .cg-wave i{background:currentColor;opacity:.75}.cg-bub .cg-vd{color:inherit;opacity:.8}
+.cg-seen{width:14px;height:14px;border-radius:50%;object-fit:cover;margin-top:3px}
+.cg-ft{flex:none;padding:6px 8px 4px;display:flex;align-items:flex-end;gap:6px}
+.cg-bar{display:flex;align-items:center;background:var(--hd);flex:1;border-radius:24px;padding:6px 14px;min-height:42px;gap:12px;color:var(--mu)}
+.cg-phone[data-eng=wa][data-theme=light] .cg-bar{background:#fff}
+.cg-fake{flex:1;color:var(--mu);font-size:15px;white-space:nowrap;overflow:hidden}
+.cg-ab{width:42px;height:42px;border-radius:50%;background:var(--ac);display:flex;align-items:center;justify-content:center;flex:none}
+.cg-phone[data-eng=msn] .cg-bar{background:var(--inp)}
+.cg-mi{color:var(--ac);font-size:20px;flex:none}
+.cg-wm{flex:none;text-align:center;font-size:9px;color:var(--mu);padding:0 0 6px;opacity:.8}.cg-wm[hidden]{display:none}
+@media (max-width:860px){.cg-split{flex-direction:column;align-items:center}.cg-stage{position:static;flex:none;width:100%;max-width:360px}.cg-phone{width:100%}.cg-ctl{width:100%}}
+@media (max-width:480px){.cg-card{padding:16px 12px;border-radius:20px}.cg-g2{grid-template-columns:1fr}.cg-phone{height:600px}
+  .cg-usage-top{justify-content:center;text-align:center}
+  .cg-nudge{justify-content:center;text-align:center}
+  .cg-nudge .cg-upgrade{width:100%}
+  .cg-limit{padding:18px 14px}
+  .cg-limit .cg-upgrade{display:block;width:100%}}
+@media (prefers-reduced-motion:reduce){.cg-btn,.cg-upgrade,.cg-dot,.cg-ctl{transition:none}}
+</style>
+
+<script>
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+
+  /* ---------- usage limit ---------- */
+  var USE_MAX = 5;
+  var USE_PERIOD = 2 * 60 * 60 * 1000;
+  var USE_KEY = 'cg_uses';
+  var memUses = []; /* in-memory backup so the tool still works if storage is unavailable */
+
+  function readUses() {
+    var now = Date.now(), arr = null, before = 0;
+    try {
+      var raw = localStorage.getItem(USE_KEY);
+      if (raw !== null) { var p = JSON.parse(raw); if (Array.isArray(p)) arr = p; }
+    } catch (e) {}
+    if (!arr) arr = memUses;
+    before = arr.length;
+    arr = arr.filter(function (t) {
+      return typeof t === 'number' && isFinite(t) && t > now - USE_PERIOD && t <= now + 60000;
+    }).sort(function (a, b) { return a - b; });
+    memUses = arr;
+    if (arr.length !== before) writeUses(arr);
+    return arr;
+  }
+  function writeUses(arr) {
+    memUses = arr;
+    try { localStorage.setItem(USE_KEY, JSON.stringify(arr)); } catch (e) {}
+  }
+  function isLimited() { return readUses().length >= USE_MAX; }
+  function recordUse() {
+    var arr = readUses().slice();
+    arr.push(Date.now());
+    writeUses(arr);
+    updateUsageUI();
+  }
+  function fmtCountdown(ms) {
+    var s = Math.max(0, Math.ceil(ms / 1000));
+    var h = Math.floor(s / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
+    return h + 'h ' + (m < 10 ? '0' + m : m) + 'm ' + (sec < 10 ? '0' + sec : sec) + 's';
+  }
+  /* the control panel and style tabs are off while the limit is reached */
+  function lockUI() {
+    var limited = isLimited(), changed = false;
+    var ctrls = document.querySelectorAll('#cg-app .cg-ctl input, #cg-app .cg-ctl select, #cg-app .cg-ctl textarea, #cg-app .cg-ctl button, #cg-app .cg-tabs button');
+    for (var i = 0; i < ctrls.length; i++) {
+      var c = ctrls[i];
+      if (limited) { if (!c.dataset.cgl) { c.dataset.cgl = '1'; } c.disabled = true; }
+      else if (c.dataset.cgl) { c.disabled = false; delete c.dataset.cgl; changed = true; }
+    }
+    if (changed && typeof typeUI === 'function') typeUI();
+    $('cg-ctl').classList.toggle('cg-locked', limited);
+    document.querySelector('#cg-app .cg-tabs').classList.toggle('cg-locked', limited);
+  }
+  function updateUsageUI() {
+    var uses = readUses();
+    var left = Math.max(0, USE_MAX - uses.length);
+    var limited = left <= 0;
+
+    $('cg-usage-text').textContent = left + ' of ' + USE_MAX + ' uses remaining';
+    var dots = $('cg-dots');
+    if (dots.childNodes.length !== USE_MAX) {
+      dots.innerHTML = '';
+      for (var i = 0; i < USE_MAX; i++) { var d = document.createElement('span'); d.className = 'cg-dot'; dots.appendChild(d); }
+    }
+    for (var j = 0; j < USE_MAX; j++) { dots.childNodes[j].className = 'cg-dot' + (j < left ? '' : ' off'); }
+
+    $('cg-nudge').hidden = !(left === 1);
+    $('cg-limit').hidden = !limited;
+
+    if (limited) {
+      var unlockAt = uses[uses.length - USE_MAX] + USE_PERIOD;
+      $('cg-timer').textContent = fmtCountdown(unlockAt - Date.now());
+    }
+    lockUI();
+  }
+  setInterval(updateUsageUI, 1000);
+  window.addEventListener('storage', function (e) { if (e.key === USE_KEY) updateUsageUI(); });
+
+  /* ---------- chat studio ---------- */
+  var DEF = 'data:image/svg+xml;utf8,' + encodeURIComponent('<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><rect width="64" height="64" fill="#8a97a0"/><circle cx="32" cy="25" r="11" fill="#e6ebee"/><path d="M10 64c2-14 12-22 22-22s20 8 22 22z" fill="#e6ebee"/></svg>');
+  var SVG = {
+    emo: '<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm-3.5-9c.83 0 1.5-.67 1.5-1.5S9.33 8 8.5 8 7 8.67 7 9.5s.67 1.5 1.5 1.5zm7 0c.83 0 1.5-.67 1.5-1.5S16.67 8 15.5 8s-1.5.67-1.5 1.5.67 1.5 1.5 1.5zm-3.5 5.5c2.33 0 4.32-1.45 5.12-3.5H6.88c.8 2.05 2.79 3.5 5.12 3.5z"/></svg>',
+    clip: '<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor" style="transform:rotate(45deg)"><path d="M16.5 6v11.5c0 2.21-1.79 4-4 4s-4-1.79-4-4V5a2.5 2.5 0 015 0v10.5c0 .55-.45 1-1 1s-1-.45-1-1V6H10v9.5a2.5 2.5 0 005 0V5c0-2.21-1.79-4-4-4S7 2.79 7 5v12.5c0 3.04 2.46 5.5 5.5 5.5s5.5-2.46 5.5-5.5V6h-1.5z"/></svg>',
+    cam: '<svg viewBox="0 0 24 24" width="22" height="22" fill="currentColor"><path d="M12 14c1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3 1.34 3 3 3zm7-9h-1.83l-1.17-1.17c-.38-.37-.89-.58-1.42-.58H9.42c-.53 0-1.04.21-1.42.58L6.83 5H5c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 12H5V7h3.88l1.17-1.17h3.9L15.12 7H19v10z"/></svg>',
+    mic: '<svg viewBox="0 0 24 24" width="20" height="20" fill="#fff"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm5.3-3c0 3-2.54 5.1-5.3 5.1S6.7 14 6.7 11H5c0 3.41 2.72 6.23 6 6.72V21h2v-3.28c3.28-.48 6-3.3 6-6.72h-1.7z"/></svg>'
+  };
+  function fresh() {
+    return { eng: 'wa', theme: 'dark', name: 'Alex Morgan', status: 'online', dp: DEF, sbt: '09:41', fmt: '12', bat: 90, bezel: true, wm: true, seen: true, last: '09:41', ticks: 'read',
+      msgs: [
+        { id: 1, side: 'l', type: 'divider', text: 'Today' },
+        { id: 2, side: 'l', type: 'text', text: 'Hey! Are we still on for tonight?', time: '09:38' },
+        { id: 3, side: 'r', type: 'text', text: 'Yes! 7 pm at the new place?', time: '09:39', status: 'read', react: '' },
+        { id: 4, side: 'l', type: 'text', text: 'Perfect. I’ll book a table 🍕', time: '09:40', react: '❤️' },
+        { id: 5, side: 'r', type: 'text', text: 'Can’t wait!', time: '09:41', status: 'read', reply: 'Perfect. I’ll book a table 🍕' }
+      ] };
+  }
+  var st, editId = null, pendingImg = null, nid = 10;
+  try { st = JSON.parse(localStorage.getItem('cg_state')); } catch (e) { st = null; }
+  st = sanitize(st) || fresh();
+  nid = st.msgs.reduce(function (m, x) { return Math.max(m, x.id); }, 10) + 1;
+
+  function sanitize(o) {
+    if (!o || typeof o !== 'object' || !Array.isArray(o.msgs)) return null;
+    var f = fresh(), s = {}, str = function (v, d, n) { return typeof v === 'string' ? v.slice(0, n || 100) : d; }, hm = function (v, d) { return /^\d{2}:\d{2}$/.test(v) ? v : d; };
+    s.eng = o.eng === 'msn' ? 'msn' : 'wa'; s.theme = o.theme === 'light' ? 'light' : 'dark'; s.name = str(o.name, f.name, 40); s.status = str(o.status, f.status, 40);
+    s.dp = typeof o.dp === 'string' && /^data:image\//.test(o.dp) ? o.dp : DEF; s.sbt = hm(o.sbt, f.sbt); s.fmt = o.fmt === '24' ? '24' : '12';
+    s.bat = Math.min(100, Math.max(1, parseInt(o.bat, 10) || 90)); s.bezel = o.bezel !== false; s.wm = o.wm !== false; s.seen = o.seen !== false; s.last = hm(o.last, s.sbt); s.ticks = ['sent', 'delivered', 'read'].indexOf(o.ticks) > -1 ? o.ticks : 'read';
+    s.msgs = o.msgs.slice(0, 300).map(function (m, i) {
+      if (!m || typeof m !== 'object') return null;
+      var t = ['text', 'image', 'voice', 'deleted', 'divider'].indexOf(m.type) > -1 ? m.type : 'text';
+      return { id: i + 1, side: m.side === 'r' ? 'r' : 'l', type: t, text: str(m.text, '', 600), img: typeof m.img === 'string' && /^data:image\//.test(m.img) ? m.img : '', dur: /^\d{1,2}:\d{2}$/.test(m.dur) ? m.dur : '0:12', reply: str(m.reply, '', 80), react: str(m.react, '', 4), time: hm(m.time, s.last), status: ['sent', 'delivered', 'read'].indexOf(m.status) > -1 ? m.status : 'read' };
+    }).filter(Boolean);
+    return s;
+  }
+  function save() { try { localStorage.setItem('cg_state', JSON.stringify(st)); } catch (e) {} }
+  function el(tag, cls, txt) { var e = document.createElement(tag); if (cls) e.className = cls; if (txt != null) e.textContent = txt; return e; }
+  function fmt(t, bar) {
+    var p = (t || '00:00').split(':'), h = +p[0], m = p[1];
+    if (st.fmt === '24') return (h < 10 ? '0' : '') + h + ':' + m;
+    return (h % 12 || 12) + ':' + m + (bar ? '' : ' ' + (h < 12 ? 'AM' : 'PM'));
+  }
+  function plus1(t) { var p = t.split(':'), n = (+p[0] * 60 + +p[1] + 1) % 1440; return ('0' + Math.floor(n / 60)).slice(-2) + ':' + ('0' + n % 60).slice(-2); }
+  function seeded(id, n) { var a = []; var x = id * 9301 + 49297; for (var i = 0; i < n; i++) { x = (x * 9301 + 49297) % 233280; a.push(4 + Math.round(x / 233280 * 18)); } return a; }
+  function wave(id, n) { var w = el('div', 'cg-wave'); seeded(id, n).forEach(function (h) { var i = document.createElement('i'); i.style.height = h + 'px'; w.appendChild(i); }); return w; }
+  function shrink(file, max, cb) {
+    var r = new FileReader();
+    r.onload = function () { var im = new Image(); im.onload = function () { var s = Math.min(1, max / Math.max(im.width, im.height)), c = document.createElement('canvas'); c.width = Math.round(im.width * s); c.height = Math.round(im.height * s); var x = c.getContext('2d'); x.fillStyle = '#fff'; x.fillRect(0, 0, c.width, c.height); x.drawImage(im, 0, 0, c.width, c.height); cb(c.toDataURL('image/jpeg', 0.82)); }; im.onerror = function () { cb(null); }; im.src = r.result; };
+    r.onerror = function () { cb(null); }; r.readAsDataURL(file);
+  }
+
+  /* ---------- render ---------- */
+  function waMsg(m) {
+    if (m.type === 'divider') return el('div', 'cg-pill', m.text || 'Today');
+    var b = el('div', 'cg-m ' + m.side + (m.react ? ' rx' : ''));
+    if (m.type === 'deleted') { b.appendChild(el('span', 'cg-del', m.side === 'r' ? '🚫 You deleted this message' : '🚫 This message was deleted')); }
+    else {
+      if (m.reply && m.type === 'text') { var q = el('div', 'cg-q'); q.appendChild(el('b', '', m.side === 'r' ? st.name || 'Contact' : 'You')); q.appendChild(el('span', '', m.reply)); b.appendChild(q); }
+      if (m.type === 'image') { var im = el('img', 'cg-pic'); im.alt = 'Photo'; im.src = m.img; b.appendChild(im); if (m.text) b.appendChild(el('span', 'cg-t', m.text)); }
+      else if (m.type === 'voice') { var v = el('div', 'cg-v'); v.appendChild(el('span', 'cg-play', '▶')); var wv = el('div', ''); wv.style.flex = '1'; wv.appendChild(wave(m.id, 28)); wv.appendChild(el('div', 'cg-vd', m.dur)); v.appendChild(wv); b.appendChild(v); }
+      else b.appendChild(el('span', 'cg-t', m.text));
+    }
+    var meta = el('span', 'cg-meta', fmt(m.time));
+    if (m.side === 'r') { var tk = el('span', 'cg-tick', m.status === 'sent' ? '✓' : '✓✓'); tk.style.color = m.status === 'read' ? '#53bdeb' : 'var(--mu)'; meta.appendChild(tk); }
+    b.appendChild(meta);
+    if (m.react) b.appendChild(el('span', 'cg-rxn', m.react));
+    return b;
+  }
+  function msnMsgs(body) {
+    var M = st.msgs, lastR = -1; M.forEach(function (m, i) { if (m.side === 'r' && m.type !== 'divider') lastR = i; });
+    M.forEach(function (m, i) {
+      if (m.type === 'divider') { body.appendChild(el('div', 'cg-pill', m.text || 'Today')); return; }
+      var row = el('div', 'cg-row ' + m.side), bub = el('div', 'cg-bub' + (m.react ? ' rx' : '') + (m.type === 'image' ? ' pic' : ''));
+      if (m.type === 'deleted') { bub.appendChild(el('span', 'cg-del', m.side === 'r' ? 'You unsent a message' : (st.name || 'Contact') + ' unsent a message')); }
+      else if (m.type === 'image') { var im = el('img'); im.alt = 'Photo'; im.src = m.img; bub.appendChild(im); }
+      else if (m.type === 'voice') { var v = el('div', 'cg-v'); v.appendChild(el('span', 'cg-play', '▶')); v.appendChild(wave(m.id, 22)); v.appendChild(el('span', 'cg-vd', m.dur)); bub.appendChild(v); }
+      else bub.appendChild(el('span', 'cg-t', m.text));
+      if (m.react) bub.appendChild(el('span', 'cg-rxn', m.react));
+      if (m.side === 'l') { var nx = M[i + 1], show = !nx || nx.side !== 'l' || nx.type === 'divider'; var av = el('img', 'cg-av' + (show ? '' : ' ph')); av.alt = ''; av.src = st.dp; row.appendChild(av); row.appendChild(bub); }
+      else { row.appendChild(bub); if (st.seen && i === lastR) { var sn = el('img', 'cg-seen'); sn.alt = 'Seen'; sn.src = st.dp; row.appendChild(sn); } }
+      body.appendChild(row);
+    });
+  }
+  function footer() {
+    var f = $('cg-ft');
+    f.innerHTML = st.eng === 'wa'
+      ? '<div class="cg-bar">' + SVG.emo + '<div class="cg-fake">Message</div>' + SVG.clip + SVG.cam + '</div><div class="cg-ab">' + SVG.mic + '</div>'
+      : '<span class="cg-mi" style="font-size:24px">⊕</span><div class="cg-bar" style="padding:6px 14px"><div class="cg-fake">Aa</div><span class="cg-mi">☺</span></div><span class="cg-mi">👍</span>';
+  }
+  function render(keepScroll) {
+    var ph = $('cg-phone'), body = $('cg-body'), top = body.scrollTop;
+    ph.dataset.eng = st.eng; ph.dataset.theme = st.theme; ph.classList.toggle('nobezel', !st.bezel);
+    $('cg-sbtime').textContent = fmt(st.sbt, true); $('cg-batt').textContent = '🔋 ' + st.bat + '%';
+    $('cg-dp').src = st.dp; $('cg-name').textContent = st.name || 'Contact'; $('cg-stat').textContent = st.status;
+    $('cg-icons').textContent = st.eng === 'wa' ? '📹  📞  ⋮' : '📞  📹  ℹ️'; $('cg-back').textContent = st.eng === 'wa' ? '←' : '‹';
+    $('cg-wm').hidden = !st.wm;
+    $('cg-t-wa').setAttribute('aria-selected', st.eng === 'wa'); $('cg-t-msn').setAttribute('aria-selected', st.eng === 'msn');
+    $('cg-fr').hidden = st.eng !== 'wa'; $('cg-fs').hidden = st.eng !== 'wa';
+    footer(); body.innerHTML = '';
+    if (st.eng === 'wa') st.msgs.forEach(function (m) { body.appendChild(waMsg(m)); }); else msnMsgs(body);
+    body.scrollTop = keepScroll ? top : body.scrollHeight;
+    renderList(); save(); lockUI();
+  }
+  function renderList() {
+    var ul = $('cg-list'); ul.innerHTML = ''; $('cg-count').textContent = st.msgs.length;
+    if (!st.msgs.length) { ul.appendChild(el('li', 'cg-empty', 'No messages yet. Add one above.')); return; }
+    var ic = { text: '', image: '🖼 ', voice: '🎤 ', deleted: '🚫 ', divider: '📅 ' };
+    st.msgs.forEach(function (m, i) {
+      var li = el('li', 'cg-li'), sd = el('span', 'cg-side' + (m.side === 'r' ? ' r' : ''), m.type === 'divider' ? '•' : m.side === 'r' ? 'S' : 'R');
+      var t = el('span', 'cg-lt', ic[m.type] + (m.type === 'voice' ? 'Voice ' + m.dur : m.type === 'deleted' ? 'Deleted message' : m.text || (m.type === 'image' ? 'Photo' : '')));
+      li.appendChild(sd); li.appendChild(t); li.appendChild(el('span', 'cg-lm', m.type === 'divider' ? '' : fmt(m.time)));
+      [['↑', 'Move up', function () { if (i > 0) { st.msgs.splice(i - 1, 0, st.msgs.splice(i, 1)[0]); render(true); } }], ['↓', 'Move down', function () { if (i < st.msgs.length - 1) { st.msgs.splice(i + 1, 0, st.msgs.splice(i, 1)[0]); render(true); } }],
+        ['⇄', 'Switch side', function () { m.side = m.side === 'r' ? 'l' : 'r'; render(true); }], ['✎', 'Edit', function () { edit(m); }], ['🗑', 'Delete', function () { st.msgs.splice(i, 1); if (editId === m.id) endEdit(); render(true); }]].forEach(function (a) {
+        var b = el('button', '', a[0]); b.type = 'button'; b.title = a[1]; b.setAttribute('aria-label', a[1]); b.onclick = a[2]; li.appendChild(b);
+      });
+      ul.appendChild(li);
+    });
+  }
+
+  /* ---------- builder ---------- */
+  function typeUI() {
+    var t = $('cg-type').value;
+    $('cg-fi').hidden = t !== 'image'; $('cg-fd').hidden = t !== 'voice'; $('cg-ftxt').hidden = t === 'voice' || t === 'deleted';
+    $('cg-textl').textContent = t === 'divider' ? 'Text (e.g. Today, Yesterday, Monday)' : t === 'image' ? 'Caption (optional)' : 'Message';
+    $('cg-rep').disabled = t !== 'text' || isLimited();
+  }
+  function err(t) { var e = $('cg-err'); e.hidden = !t; e.textContent = t || ''; }
+  function collect(side) {
+    var t = $('cg-type').value, text = $('cg-text').value.trim(), dur = $('cg-dur').value.trim();
+    if ((t === 'text' || t === 'divider') && !text) { err('Please write some text first.'); return null; }
+    if (t === 'voice' && !/^\d{1,2}:\d{2}$/.test(dur)) { err('Enter the voice length like 0:12.'); return null; }
+    var img = pendingImg || (editId && (st.msgs.filter(function (x) { return x.id === editId; })[0] || {}).img) || '';
+    if (t === 'image' && !img) { err('Choose a photo first.'); return null; }
+    err('');
+    return { type: t, text: t === 'voice' || t === 'deleted' ? '' : text, img: t === 'image' ? img : '', dur: dur || '0:12', reply: t === 'text' ? $('cg-rep').value.trim() : '', react: $('cg-rx').value, time: $('cg-mt').value || st.last, status: $('cg-ticks').value, side: side };
+  }
+  function resetBuilder() { $('cg-text').value = ''; $('cg-rep').value = ''; $('cg-rx').value = ''; $('cg-img').value = ''; $('cg-imgn').textContent = ''; pendingImg = null; }
+  function add(side) {
+    var m = collect(side); if (!m) return; m.id = nid++; st.msgs.push(m);
+    if ($('cg-adv').checked && m.type !== 'divider') { st.last = plus1(m.time); $('cg-mt').value = st.last; } else st.last = m.time;
+    resetBuilder(); render(false); $('cg-text').focus();
+  }
+  function edit(m) {
+    editId = m.id; $('cg-type').value = m.type; typeUI(); $('cg-text').value = m.text || ''; $('cg-dur').value = m.dur || '0:12'; $('cg-rep').value = m.reply || ''; $('cg-rx').value = m.react || '';
+    $('cg-mt').value = m.time || st.last; if (m.side === 'r') $('cg-ticks').value = m.status || 'read'; pendingImg = null; $('cg-imgn').textContent = m.img ? 'Current photo kept unless you choose a new one.' : '';
+    $('cg-bh').textContent = 'Editing message'; $('cg-addrow').hidden = true; $('cg-editrow').hidden = false; $('cg-bh').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  function endEdit() { editId = null; $('cg-bh').textContent = 'Message builder'; $('cg-addrow').hidden = false; $('cg-editrow').hidden = true; resetBuilder(); err(''); }
+  $('cg-save').onclick = function () {
+    var m = st.msgs.filter(function (x) { return x.id === editId; })[0]; if (!m) return endEdit();
+    var n = collect(m.side); if (!n) return; Object.keys(n).forEach(function (k) { m[k] = n[k]; }); endEdit(); render(true);
+  };
+  $('cg-cancel').onclick = endEdit;
+  $('cg-addl').onclick = function () { add('l'); }; $('cg-addr').onclick = function () { add('r'); };
+  $('cg-type').onchange = typeUI;
+  $('cg-text').addEventListener('keydown', function (e) { if (e.ctrlKey && e.key === 'Enter') { e.preventDefault(); editId ? $('cg-save').click() : add('r'); } });
+  $('cg-img').onchange = function () { var f = this.files[0]; if (!f) return; $('cg-imgn').textContent = 'Preparing photo…'; shrink(f, 700, function (d) { pendingImg = d; $('cg-imgn').textContent = d ? 'Photo ready.' : 'Could not read that image.'; }); };
+  $('cg-ticks').onchange = function () { st.ticks = this.value; save(); };
+
+  /* ---------- settings ---------- */
+  function fill() {
+    $('cg-theme').value = st.theme; $('cg-fmt').value = st.fmt; $('cg-sbt').value = st.sbt; $('cg-bat').value = st.bat; $('cg-bezel').checked = st.bezel; $('cg-wmc').checked = st.wm; $('cg-seen').checked = st.seen;
+    $('cg-nm').value = st.name; $('cg-st').value = st.status; $('cg-mt').value = st.last; $('cg-ticks').value = st.ticks;
+  }
+  function on(id, ev, fn) { $(id).addEventListener(ev, fn); }
+  on('cg-theme', 'change', function () { st.theme = this.value; render(true); });
+  on('cg-fmt', 'change', function () { st.fmt = this.value; render(true); });
+  on('cg-sbt', 'input', function () { if (this.value) { st.sbt = this.value; render(true); } });
+  on('cg-bat', 'input', function () { var v = parseInt(this.value, 10); if (v >= 1 && v <= 100) { st.bat = v; render(true); } });
+  on('cg-bezel', 'change', function () { st.bezel = this.checked; render(true); });
+  on('cg-wmc', 'change', function () { st.wm = this.checked; render(true); });
+  on('cg-seen', 'change', function () { st.seen = this.checked; render(true); });
+  on('cg-nm', 'input', function () { st.name = this.value; render(true); });
+  on('cg-st', 'input', function () { st.status = this.value; render(true); });
+  on('cg-mt', 'change', function () { if (this.value) st.last = this.value; });
+  on('cg-dpf', 'change', function () { var f = this.files[0]; if (!f) return; shrink(f, 256, function (d) { if (d) { st.dp = d; render(true); } }); });
+  on('cg-dpr', 'click', function () { st.dp = DEF; $('cg-dpf').value = ''; render(true); });
+  Array.prototype.forEach.call(document.querySelectorAll('#cg-app .cg-tab'), function (b) {
+    b.onclick = function () {
+      var old = st.eng; st.eng = b.dataset.eng;
+      if (old !== st.eng) { if (st.status === 'online' && st.eng === 'msn') st.status = 'Active now'; else if (st.status === 'Active now' && st.eng === 'wa') st.status = 'online'; $('cg-st').value = st.status; }
+      render(false);
+    };
+  });
+  on('cg-sample', 'click', function () { var f = fresh(); st.msgs = f.msgs; st.last = f.last; nid = 10; $('cg-mt').value = st.last; endEdit(); render(false); });
+  on('cg-clear', 'click', function () { if (!st.msgs.length || window.confirm('Remove all messages from this chat?')) { st.msgs = []; endEdit(); render(false); } });
+
+  /* ---------- export ---------- */
+  function xmsg(t, bad) { var m = $('cg-xmsg'); m.hidden = !t; m.textContent = t || ''; m.className = 'cg-xmsg' + (bad ? ' bad' : ''); if (t) setTimeout(function () { m.hidden = true; }, 4000); }
+  function loadScript(src) { return new Promise(function (res, rej) { var s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = function () { s.remove(); rej(); }; document.head.appendChild(s); }); }
+  function ensure() {
+    if (window.html2canvas) return Promise.resolve();
+    return loadScript('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js').catch(function () { return loadScript('https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js'); }).catch(function () { throw new Error('Could not load the screenshot library. Check your connection.'); });
+  }
+  function capture() {
+    return ensure().then(function () {
+      var ph = $('cg-phone'), bd = $('cg-body'), o = [ph.style.height, bd.style.overflow, bd.style.flex, bd.scrollTop];
+      if ($('cg-fit').checked) { ph.style.height = 'auto'; bd.style.overflow = 'visible'; bd.style.flex = 'none'; }
+      var restore = function () { ph.style.height = o[0]; bd.style.overflow = o[1]; bd.style.flex = o[2]; bd.scrollTop = o[3]; };
+      return window.html2canvas(ph, { useCORS: true, scale: +$('cg-scale').value, backgroundColor: null }).then(function (c) { restore(); return c; }, function (e) { restore(); throw e; });
+    });
+  }
+  /* main actions: saving or copying a screenshot (each successful one counts as 1 use) */
+  on('cg-dl', 'click', function () {
+    if (isLimited()) { updateUsageUI(); return; }
+    xmsg('Preparing screenshot…');
+    capture().then(function (c) { c.toBlob(function (b) {
+      if (!b) { xmsg('Could not create the screenshot.', true); return; }
+      var a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'chat-mockup-' + st.eng + '.png'; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+      xmsg('Screenshot saved.'); recordUse();
+    }, 'image/png'); }).catch(function (e) { xmsg(e.message || 'Could not create the screenshot.', true); });
+  });
+  on('cg-cp', 'click', function () {
+    if (isLimited()) { updateUsageUI(); return; }
+    if (!(navigator.clipboard && window.ClipboardItem)) { xmsg('Copying images is not supported in this browser. Use Save screenshot instead.', true); return; }
+    capture().then(function (c) { c.toBlob(function (b) {
+      if (!b) { xmsg('Could not create the image.', true); return; }
+      navigator.clipboard.write([new ClipboardItem({ 'image/png': b })]).then(function () { xmsg('Image copied.'); recordUse(); }, function () { xmsg('Could not copy the image.', true); });
+    }, 'image/png'); }).catch(function (e) { xmsg(e.message || 'Could not create the image.', true); });
+  });
+  on('cg-json', 'click', function () {
+    var a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([JSON.stringify(st)], { type: 'application/json' })); a.download = 'chat-mockup.json'; document.body.appendChild(a); a.click(); setTimeout(function () { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
+  });
+  on('cg-load', 'click', function () { $('cg-loadf').click(); });
+  on('cg-loadf', 'change', function () {
+    var f = this.files[0], inp = this; if (!f) return;
+    f.text().then(function (t) { var s = sanitize(JSON.parse(t)); if (!s) throw 0; st = s; nid = st.msgs.length + 10; endEdit(); fill(); render(false); xmsg('Chat loaded.'); }).catch(function () { xmsg('That file is not a valid chat file.', true); }).then(function () { inp.value = ''; });
+  });
+
+  fill(); typeUI(); render(false); updateUsageUI();
+})();
+</script>
